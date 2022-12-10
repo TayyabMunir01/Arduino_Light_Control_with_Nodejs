@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>light controller</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            user-select: none;
+        }
+        body{
+            color: white;
+            background-color: darkslategray;
+            font-family: monospace;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        button{width: 10rem;
+        height: 10rem;
+        font-size: 2.5rem;
+        color:red;
+        background-color: black;
+        border-radius: 20%;
+        font-family: 'Courier New', Courier, monospace;
+        outline: none;
+        }
+        h1{
+            font-size: 5rem;
+            color: whitesmoke;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        .container{
+            /* margin: 0; */
+            height: fit-content;
+            width: fit-content;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        button:active{
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    
+  <div class="container">
+      <h1>Light</h1>
+      <button id="on">
+          On
+      </button>
+      <button id="off">
+          Off
+      </button>
+  </div>
+
+    <script>
+        const url = 'http://192.168.10.4:3000'
+        const btnOn = document.getElementById('on')
+        const btnOff = document.getElementById('off')
+
+        btnOn.addEventListener('click', async ()=>{
+            // console.log('on')
+            // const res = await fetch(url+'/users',{method: 'GET'})
+            // console.log(res)
+            // const data = await res.json()
+            // console.log(data.data)
+
+            console.log('on')
+            const res = await fetch(url+'/light',{
+                method: 'POST', 
+                headers: {"Content-Type": 'application/json'},
+                body: JSON.stringify({lightCondition: 'on'})
+             })
+
+
+        })
+
+        btnOff.addEventListener('click', async ()=>{
+            console.log('off')
+            const res = await fetch(url+'/light',{
+                method: 'POST', 
+                headers: {"Content-Type": 'application/json'},
+                body: JSON.stringify({lightCondition: 'off'})
+             })
+        })
+
+    </script>
+
+</body>
+</html>
